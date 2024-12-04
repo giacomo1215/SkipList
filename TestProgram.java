@@ -59,7 +59,7 @@ class SkipListPQ {
         height = 0;
     }
 
-    // public int size() {}
+    public int size() { return size; }
 
     // public MyEntry min() {}
 
