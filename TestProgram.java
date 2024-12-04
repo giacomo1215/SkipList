@@ -7,16 +7,20 @@ import java.util.*;
 class MyEntry {
     private Integer key;
     private String value;
+
     public MyEntry(Integer key, String value) {
         this.key = key;
         this.value = value;
     }
+
     public Integer getKey() {
         return key;
     }
+
     public String getValue() {
         return value;
     }
+
     @Override
     public String toString() {
         return key + " " + value;
@@ -26,12 +30,33 @@ class MyEntry {
 //Class SkipListPQ
 class SkipListPQ {
 
+    // Nodo/Posizione interna
+    private class Position {
+        MyEntry entry;
+        Position next;
+        Position prev;
+        Position above;
+        Position below;
+
+        Position(MyEntry entry) {
+            this.entry = entry;
+        }
+    }
+
+    private Position start; // Posizione di partenza (sx)
+    private int height;     // Altezza attuale del skip list
+    private int size;       // Numero di entries
+
     private double alpha;
     private Random rand;
 
     public SkipListPQ(double alpha) {
         this.alpha = alpha;
         this.rand = new Random();
+
+        // Inizializzo con nodi sentinelle
+        start = new Position(new MyEntry(Integer.MIN_VALUE, ""));
+        height = 0;
     }
 
     // public int size() {}
